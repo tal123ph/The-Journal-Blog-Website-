@@ -44,7 +44,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-16 md:py-24 min-h-[400px] md:min-h-[480px]">
       <div className="container mx-auto px-4">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-warm p-8 md:p-12 lg:p-16">
           <div className="relative z-10 max-w-2xl mx-auto text-center">
