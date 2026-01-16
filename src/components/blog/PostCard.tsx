@@ -38,10 +38,12 @@ const PostCard = ({
         className="group block relative overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-all duration-300"
       >
         <div className="grid md:grid-cols-2 gap-0">
-          <div className="relative h-64 md:h-full min-h-[300px] overflow-hidden">
+          <div className="relative h-64 md:h-full min-h-[300px] overflow-hidden aspect-video md:aspect-auto">
             <img
               src={coverImage || "/placeholder.svg"}
               alt={title}
+              width={800}
+              height={450}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
@@ -81,10 +83,12 @@ const PostCard = ({
       to={`/post/${id}`}
       className="group block bg-card rounded-xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-300"
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-48 overflow-hidden aspect-video">
         <img
           src={coverImage || "/placeholder.svg"}
           alt={title}
+          width={800}
+          height={450}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         {category && (
