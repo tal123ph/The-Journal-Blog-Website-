@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -6,6 +6,7 @@ import Newsletter from "@/components/blog/Newsletter";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import DOMPurify from "dompurify";
 
 interface Post {
   id: string;
@@ -147,10 +148,16 @@ const PostPage = () => {
               </div>
             )}
 
-            {/* Content */}
+            {/* Content - Sanitized to prevent XSS */}
             <div
               className="prose prose-lg max-w-3xl mx-auto prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary"
-              dangerouslySetInnerHTML={{ __html: displayPost.content }}
+              dangerouslySetInnerHTML={{ 
+                __html: DOMPurify.sanitize(displayPost.content, {
+                  ALLOWED_TAGS: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'em', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'br', 'span', 'div', 'img'],
+                  ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'class', 'id'],
+                  ALLOW_DATA_ATTR: false
+                })
+              }}
             />
 
             {/* Author Bio */}
